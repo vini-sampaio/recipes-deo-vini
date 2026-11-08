@@ -24,6 +24,20 @@
     if (r.metaText) return r.metaText;
     return r.time + ' min' + (r.note ? ' ' + r.note : '') + ' · ' + r.servings + (r.servings === 1 ? ' serving' : ' servings');
   }
+  // Link to the original recipe page, labeled with the site's domain.
+  function sourceHTML(url) {
+    var host;
+    try { host = new URL(url).hostname.replace(/^www\./, ''); } catch (e) { host = url; }
+    return '<a class="source" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' +
+      '<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>' +
+      'Recipe from ' + esc(host) + '<span class="sr-only"> (opens in a new tab)</span></a>';
+  }
+  // Meal tag, then one tag per protein (recipes with several proteins list them in prots).
+  function tagsHTML(r) {
+    var list = r.prots || [r.protein];
+    return '<div class="tags"><span class="tag tag--meal">' + esc(r.category) + '</span>' +
+      list.map(function (p) { return '<span class="tag tag--protein">' + esc(p) + '</span>'; }).join('') + '</div>';
+  }
   function icon(protein, size) {
     var inner = window.PROTEIN_ICONS[protein] || '';
     return '<svg aria-hidden="true" width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">' + inner + '</svg>';
@@ -86,7 +100,7 @@
     return '<a class="card" href="#/recipe/' + slug(r.name) + '">' +
       '<div class="card__media' + (tall ? ' card__media--tall' : '') + '" aria-hidden="true">' + media + '</div>' +
       '<div class="card__body">' +
-      '<div class="tags"><span class="tag tag--meal">' + esc(r.category) + '</span><span class="tag tag--protein">' + esc(r.protein) + '</span></div>' +
+      tagsHTML(r) +
       '<' + (tall ? 'h3' : 'h2') + ' class="card__title">' + esc(r.name) + '</' + (tall ? 'h3' : 'h2') + '>' +
       '<p class="meta">' + esc(meta(r)) + '</p>' +
       '</div></a>';
@@ -163,7 +177,7 @@
       '<div class="recipe__body">' +
       '<a class="back" href="#"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Back to recipes</a>' +
       '<div style="display:flex;flex-direction:column;gap:8px">' +
-      '<div class="tags"><span class="tag tag--meal">' + esc(r.category) + '</span><span class="tag tag--protein">' + esc(r.protein) + '</span></div>' +
+      tagsHTML(r) +
       '<h2 class="recipe__title" id="recipe-title" tabindex="-1">' + esc(r.name) + '</h2>' +
       '<p class="meta">' + esc(meta(r)) + '</p>' +
       '<div class="stepper" role="group" aria-label="Servings">' +
@@ -174,7 +188,9 @@
       '<div class="columns">' +
       '<section class="col-ingredients"><h3>Ingredients</h3><div class="groups">' + ing + '</div></section>' +
       '<section class="col-steps"><h3>Instructions</h3><div class="groups">' + steps + '</div></section>' +
-      '</div></div></article>' +
+      '</div>' +
+      (r.source ? '<footer class="recipe__source">' + sourceHTML(r.source) + '</footer>' : '') +
+      '</div></article>' +
       (sugg.length ? '<section class="more" aria-labelledby="more-title"><h2 id="more-title">You might also like</h2><div class="grid">' +
         sugg.map(function (x) { return cardHTML(x, true); }).join('') + '</div></section>' : '');
   }

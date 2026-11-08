@@ -21,6 +21,7 @@ Personal recipe site. Plain HTML, CSS and JavaScript, no build step. Open `index
   note: 'plus marinating',             // optional, appended to the time
   metaText: 'Build your own · 1 serving', // optional, replaces time/servings line
   image: 'images/greek-bowls.jpg',     // optional, otherwise the protein icon shows
+  source: 'https://example.com/recipe', // optional, link to the original recipe
   ingredients: ['1 lb chicken', 'Marinade: 3 tbsp olive oil', ...],
   steps: ['Marinade: Combine ...', 'Grill the chicken ...', 'Side: Roast ...'] }
 ```
