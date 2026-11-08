@@ -14,13 +14,17 @@
   <header class="site-header">
     <div class="site-header__inner">
       <a class="brand" href="#">Vini &amp; Deo Recipes</a>
-      <span class="count" id="count"></span>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-lang="en" lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="pt" lang="pt-BR" aria-pressed="false">PT</button>
+      </div>
     </div>
   </header>
   <main id="app"></main>
 
   <script src="src/recipes.js"></script>
   <script src="src/icons.js"></script>
+  <script src="src/i18n.js"></script>
   <script src="src/app.js"></script>
 </body>
 </html>

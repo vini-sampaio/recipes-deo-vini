@@ -6,6 +6,7 @@ Personal recipe site. Plain HTML, CSS and JavaScript, no build step. Open `index
 - `index.html`: page shell (header, `<main id="app">`), loads fonts and scripts.
 - `src/recipes.js`: all recipe data (`window.RECIPES`). Most changes happen here.
 - `src/app.js`: rendering, filters, hash routing (`#/recipe/<slug>`), servings scaling, suggestions.
+- `src/i18n.js`: interface text in English and Brazilian Portuguese (`window.I18N`) and Portuguese recipe versions (`window.RECIPES_PT`, keyed by the English name). The header EN/PT toggle switches language; English is the default and the choice is saved in localStorage.
 - `src/icons.js`: Lucide protein icons (inner SVG markup), stroke width 1.
 - `src/tokens.css`: design tokens as CSS variables. `src/styles.css`: all component styles.
 - `design-system/`: the Vini's Kitchen design system source (`tokens.json`, `README.md`).
@@ -29,6 +30,7 @@ Personal recipe site. Plain HTML, CSS and JavaScript, no build step. Open `index
 - A `Prefix: ` on an ingredient or step puts it in a labeled section (Marinade, Sauce, Dressing, Side, Optional, To serve, "Carb, pick one"). In steps, Marinade/Dressing/Sauce come before the main "Meal" steps and other sections come after.
 - Servings scaling only changes the number at the start of an ingredient (after any prefix). Write amounts first: "2 tbsp olive oil", not "Olive oil, 2 tbsp".
 - Use grams instead of ounces. Translate recipes to English.
+- Every recipe also needs a Brazilian Portuguese entry in `src/i18n.js` with `name`, `ingredients`, `steps` (and `note`/`metaText` if used). Keep amounts first, use `a` for ranges ("1 a 2"), `xíc.`, `col. (sopa)`, `col. (chá)`, and Portuguese section prefixes: Molho, Marinada, Molho da salada, Acompanhamento, Opcional, Para servir, "Carboidrato, escolha um". Temperatures in °C.
 
 ## Design rules (from the design system)
 - Use the CSS variables in `src/tokens.css`, never raw hex in new styles.
