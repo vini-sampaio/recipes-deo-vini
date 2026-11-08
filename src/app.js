@@ -95,7 +95,7 @@
   // ---------- views ----------
   function cardHTML(r, tall) {
     var media = r.image
-      ? '<img src="' + esc(r.image) + '" alt="">'
+      ? '<img src="' + esc(r.image) + '" alt="" loading="lazy">'
       : icon(prots(r)[0], 50);
     return '<a class="card" href="#/recipe/' + slug(r.name) + '">' +
       '<div class="card__media' + (tall ? ' card__media--tall' : '') + '" aria-hidden="true">' + media + '</div>' +
