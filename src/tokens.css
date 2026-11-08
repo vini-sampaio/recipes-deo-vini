@@ -4,6 +4,7 @@
   --green-700: #067a46;   /* Primary actions, selected chips, links */
   --green-900: #034a2a;   /* Headings, hover on primary */
   --lime-400: #91c11e;    /* Accent and badges, always with ink text */
+  --lime-200: #d4eba0;    /* Meal tags, always with ink text */
   --lime-100: #eef6dc;    /* Soft tinted backgrounds */
   --surface: #ffffff;     /* Cards */
   --surface-alt: #f6f5f1; /* Page and section background */
@@ -14,8 +15,8 @@
   --tomato-600: #c4401f;  /* Spicy or warning tags only */
 
   /* Type */
-  --font-sans: "Source Sans 3", system-ui, sans-serif;
-  --font-display: "Poppins", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Instrument Serif", Georgia, serif;
 
   /* Spacing */
   --space-2: 8px;

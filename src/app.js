@@ -40,7 +40,7 @@
   }
   function icon(protein, size) {
     var inner = window.PROTEIN_ICONS[protein] || '';
-    return '<svg aria-hidden="true" width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">' + inner + '</svg>';
+    return '<svg aria-hidden="true" width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="' + (size >= 40 ? 0.5 : 1) + '" stroke-linecap="round" stroke-linejoin="round">' + inner + '</svg>';
   }
 
   // ---------- quantity scaling ----------
@@ -98,7 +98,7 @@
       ? '<img src="' + esc(r.image) + '" alt="" loading="lazy">'
       : icon(prots(r)[0], 50);
     return '<a class="card" href="#/recipe/' + slug(r.name) + '">' +
-      '<div class="card__media' + (tall ? ' card__media--tall' : '') + '" aria-hidden="true">' + media + '</div>' +
+      '<div class="card__media' + (tall ? ' card__media--tall' : '') + (r.image ? ' card__media--photo' : '') + '" aria-hidden="true">' + media + '</div>' +
       '<div class="card__body">' +
       tagsHTML(r) +
       '<' + (tall ? 'h3' : 'h2') + ' class="card__title">' + esc(r.name) + '</' + (tall ? 'h3' : 'h2') + '>' +
@@ -128,7 +128,7 @@
       : '<div class="empty"><h2>Nothing matches yet</h2><p>Try another meal or fewer proteins.</p><button type="button" class="btn-primary" data-reset>Show all recipes</button></div>';
 
     app.innerHTML =
-      '<div><h1 class="page-title">My recipes</h1><p class="page-intro">The dishes I keep coming back to. Pick a meal, then narrow it down by protein.</p></div>' +
+      '<h1 class="visually-hidden">My recipes</h1>' +
       '<div class="layout">' +
       '<aside class="filters" aria-label="Filters">' +
       '<div class="filter-group"><span class="label">Meal</span><div class="chips" role="group" aria-label="Meal">' + mealChips + '</div></div>' +

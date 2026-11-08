@@ -34,7 +34,7 @@ Personal recipe site. Plain HTML, CSS and JavaScript, no build step. Open `index
 - Use the CSS variables in `src/tokens.css`, never raw hex in new styles.
 - Primary: `--green-700` for actions and selected chips. `--lime-400` is an accent and always takes `--ink` text.
 - Page on `--surface-alt`, cards on `--surface` with `--radius-md` and `--shadow-card`.
-- Headings in Poppins (`--font-display`), body in Source Sans 3 (`--font-sans`). Sentence case everywhere.
+- Headings in Instrument Serif Regular (`--font-display`, weight 400 only), body in Inter Light 300 (`--font-sans`, weight 300 only). Sentence case everywhere.
 - Icons: Lucide only, stroke width 1, no emoji.
 - Never use em dashes in copy.
 
