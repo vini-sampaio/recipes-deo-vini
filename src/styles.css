@@ -1,4 +1,5 @@
 * { box-sizing: border-box; }
+html { scrollbar-gutter: stable; } /* Reserve scrollbar space so the layout does not shift between short and long pages */
 body { margin: 0; font-weight: 300; background: var(--surface-alt); color: var(--ink); font-family: var(--font-sans); font-size: 16px; line-height: 24px; }
 a { color: var(--green-700); }
 a:hover { color: var(--green-900); }
@@ -14,6 +15,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--lime-400); outl
 .lang-toggle { display: inline-flex; gap: 2px; padding: 2px; border: 1px solid var(--border-strong); border-radius: var(--radius-pill); background: var(--surface); }
 .lang-toggle button { min-width: 44px; min-height: 36px; padding: 0 12px; border: 0; border-radius: var(--radius-pill); background: transparent; color: var(--ink); font-size: 14px; line-height: 20px; cursor: pointer; }
 .lang-toggle button[aria-pressed="true"] { background: var(--green-700); color: #ffffff; }
+.lang-toggle button:hover { background: var(--lime-100); }
+.lang-toggle button[aria-pressed="true"]:hover { background: var(--green-900); }
 
 main { max-width: 1200px; margin: 0 auto; padding: var(--space-10) 24px 64px; display: flex; flex-direction: column; gap: 32px; }
 .page-title { margin: 0; font-family: var(--font-display); font-size: 40px; line-height: 48px; font-weight: 400; color: var(--green-900); }
@@ -34,6 +37,8 @@ main { max-width: 1200px; margin: 0 auto; padding: var(--space-10) 24px 64px; di
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip { display: inline-flex; align-items: center; gap: 6px; border-radius: var(--radius-pill); padding: 6px 12px; min-height: 40px; font-size: 14px; font-weight: 300; cursor: pointer; background: var(--surface); color: var(--ink); border: 1px solid var(--border-strong); }
 .chip[aria-pressed="true"] { background: var(--green-700); color: #ffffff; border-color: var(--green-700); }
+.chip:hover { background: var(--lime-100); }
+.chip[aria-pressed="true"]:hover { background: var(--green-900); border-color: var(--green-900); }
 
 /* Cards */
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }

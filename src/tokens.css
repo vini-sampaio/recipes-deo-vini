@@ -31,5 +31,5 @@
 
   /* Shadow */
   --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --shadow-card-hover: 0 8px 20px rgba(0, 0, 0, 0.12);
+  --shadow-card-hover: 0 8px 20px rgba(171, 151, 109, 0.24); /* #AB976D at 24% */
 }
