@@ -1,0 +1,34 @@
+/* Vini's Kitchen design tokens. Generated from design-system/tokens.json. */
+:root {
+  /* Color */
+  --green-700: #067a46;   /* Primary actions, selected chips, links */
+  --green-900: #034a2a;   /* Headings, hover on primary */
+  --lime-400: #91c11e;    /* Accent and badges, always with ink text */
+  --lime-100: #eef6dc;    /* Soft tinted backgrounds */
+  --surface: #ffffff;     /* Cards */
+  --surface-alt: #f6f5f1; /* Page and section background */
+  --ink: #242424;         /* Body text */
+  --ink-muted: #5c5c5c;   /* Meta text */
+  --border: #dcdcd5;      /* Card and chip outlines */
+  --border-strong: #8f8f86; /* Control outlines that need 3:1 contrast */
+  --tomato-600: #c4401f;  /* Spicy or warning tags only */
+
+  /* Type */
+  --font-sans: "Source Sans 3", system-ui, sans-serif;
+  --font-display: "Poppins", system-ui, sans-serif;
+
+  /* Spacing */
+  --space-2: 8px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-10: 40px;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-pill: 999px;
+
+  /* Shadow */
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-card-hover: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
