@@ -172,10 +172,11 @@
     }).slice(0, 3);
 
     app.innerHTML =
+      '<a class="back" href="#"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Back to recipes</a>' +
       '<article class="recipe">' +
       (r.image ? '<img class="recipe__hero" src="' + esc(r.image) + '" alt="' + esc(r.name) + '">' : '') +
       '<div class="recipe__body">' +
-      '<a class="back" href="#"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Back to recipes</a>' +
+      
       '<div style="display:flex;flex-direction:column;gap:8px">' +
       tagsHTML(r) +
       '<h2 class="recipe__title" id="recipe-title" tabindex="-1">' + esc(r.name) + '</h2>' +
