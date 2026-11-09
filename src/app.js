@@ -9,13 +9,18 @@
   // Prep sections shown before the main steps, in either language.
   var PREP_GROUPS = ['Marinade', 'Dressing', 'Sauce', 'Marinada', 'Molho', 'Molho da salada'];
   var LANG_KEY = 'recipes-lang';
+  var DEFAULT_LANG = 'en';
 
-  var state = { category: 'All', proteins: [], servings: null, lastSlug: null, lang: loadLang() };
+  var state = { category: 'All', proteins: [], servings: null, lastSlug: null, focusBrand: false, lang: loadLang() };
   var app = document.getElementById('app');
 
   // ---------- language ----------
+  // Languages come from the keys of window.I18N; English is the default.
   function loadLang() {
-    try { return localStorage.getItem(LANG_KEY) === 'pt' ? 'pt' : 'en'; } catch (e) { return 'en'; }
+    try {
+      var saved = localStorage.getItem(LANG_KEY);
+      return Object.prototype.hasOwnProperty.call(window.I18N, saved) ? saved : DEFAULT_LANG;
+    } catch (e) { return DEFAULT_LANG; }
   }
   function saveLang(lang) {
     try { localStorage.setItem(LANG_KEY, lang); } catch (e) { /* storage blocked: the choice lasts for this visit */ }
@@ -28,15 +33,10 @@
     var pt = state.lang === 'pt' && window.RECIPES_PT[r.name];
     return pt ? Object.assign({}, r, pt) : r;
   }
+  function brandName() { return t('brandLines').join(' '); }
   function applyChrome() {
-    document.documentElement.lang = state.lang === 'pt' ? 'pt-BR' : 'en';
-    document.title = t('brand');
-    document.querySelector('.brand').textContent = t('brand');
-    var toggle = document.querySelector('.lang-toggle');
-    toggle.setAttribute('aria-label', t('language'));
-    toggle.querySelectorAll('button').forEach(function (b) {
-      b.setAttribute('aria-pressed', String(b.dataset.lang === state.lang));
-    });
+    document.documentElement.lang = t('htmlLang');
+    document.title = brandName();
   }
 
   // ---------- helpers ----------
@@ -126,6 +126,22 @@
   }
 
   // ---------- views ----------
+  // Brand lockup: one line per entry in brandLines, with the ampersand in italic.
+  // The space between lines keeps the link's accessible name readable ("Deo & Vini Recipes").
+  function brandHTML() {
+    return '<a class="brand" href="#">' + t('brandLines').map(function (line) {
+      return '<span class="brand__line">' + esc(line).replace(/&amp;/g, '<span class="brand__amp">&amp;</span>') + '</span>';
+    }).join(' ') + '</a>';
+  }
+  // One button per language in window.I18N, labeled and tagged in its own language.
+  function langToggleHTML() {
+    return '<div class="lang-toggle" role="group" aria-label="' + esc(t('language')) + '">' +
+      Object.keys(window.I18N).map(function (code) {
+        var L = window.I18N[code];
+        return '<button type="button" data-lang="' + esc(code) + '" lang="' + esc(L.htmlLang) + '" aria-pressed="' + (code === state.lang) + '">' + esc(L.short) + '</button>';
+      }).join('') + '</div>';
+  }
+
   function cardHTML(r, tall) {
     var v = view(r);
     var media = r.image
@@ -199,13 +215,16 @@
 
     app.innerHTML =
       '<h1 class="visually-hidden">' + esc(t('myRecipes')) + '</h1>' +
-      '<div class="layout">' +
+      '<div class="layout layout--home">' +
+      '<div class="sidebar">' + brandHTML() + '<hr class="divider">' +
       '<aside class="filters" aria-label="' + esc(t('filters')) + '">' +
       '<div class="filter-group"><span class="label">' + esc(t('meal')) + '</span><div class="chips" role="group" aria-label="' + esc(t('meal')) + '">' + mealChips + '</div></div>' +
       '<div class="filter-group"><div class="filter-head"><span class="label">' + esc(t('protein')) + '</span>' +
       (state.proteins.length ? '<button type="button" class="link-btn" data-clear>' + esc(t('clear')) + '</button>' : '') +
       '</div><div class="chips" role="group" aria-label="' + esc(t('protein')) + '">' + protChips + '</div></div>' +
       '</aside>' +
+      '<hr class="divider">' + langToggleHTML() +
+      '</div>' +
       '<div class="results">' + results + '</div>' +
       '</div>';
 
@@ -241,12 +260,17 @@
       return sa - sb;
     }).slice(0, 3);
 
+    // DOM order is brand, recipe, suggestions (the order on small screens and for keyboard users);
+    // on wide screens the grid puts the suggestions in the left column under the brand.
     app.innerHTML =
+      '<div class="layout layout--recipe">' +
+      '<div class="sidebar">' + brandHTML() + '</div>' +
+      '<div class="detail">' +
       '<a class="back" href="#"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>' + esc(t('back')) + '</a>' +
       '<article class="recipe">' +
       (r.image ? '<img class="recipe__hero" src="' + esc(r.image) + '" alt="' + esc(v.name) + '">' : '') +
       '<div class="recipe__body">' +
-      '<div style="display:flex;flex-direction:column;gap:8px">' +
+      '<div class="recipe__head">' +
       tagsHTML(r) +
       '<h2 class="recipe__title" id="recipe-title" tabindex="-1">' + esc(v.name) + '</h2>' +
       '<p class="meta">' + esc(meta(r)) + '</p>' +
@@ -261,8 +285,10 @@
       '</div>' +
       (r.source ? '<footer class="recipe__source">' + sourceHTML(r.source) + '</footer>' : '') +
       '</div></article>' +
+      '</div>' +
       (sugg.length ? '<section class="more" aria-labelledby="more-title"><h2 id="more-title">' + esc(t('alsoLike')) + '</h2><div class="grid">' +
-        sugg.map(function (x) { return cardHTML(x, true); }).join('') + '</div></section>' : '');
+        sugg.map(function (x) { return cardHTML(x, true); }).join('') + '</div></section>' : '') +
+      '</div>';
   }
 
   // ---------- routing ----------
@@ -283,7 +309,10 @@
     } else {
       var from = state.lastSlug;
       state.lastSlug = null;
-      renderList(from ? 'a.card[href="#/recipe/' + from + '"]' : null);
+      // Back from a recipe: focus its card. Home through the brand: keep focus on the brand.
+      var focus = state.focusBrand ? '.brand' : (from ? 'a.card[href="#/recipe/' + from + '"]' : null);
+      state.focusBrand = false;
+      renderList(focus);
     }
   }
 
@@ -299,6 +328,23 @@
     }
     else if (b.hasAttribute('data-clear')) { state.proteins = []; renderList('[data-protein="Chicken"]'); }
     else if (b.hasAttribute('data-reset')) { state.category = 'All'; state.proteins = []; renderList(); }
+    else if (b.dataset.lang) {
+      // Language toggle: re-render the current view in place and keep focus on the toggle.
+      if (b.dataset.lang === state.lang) return;
+      state.lang = b.dataset.lang;
+      saveLang(state.lang);
+      applyChrome();
+      var shown = currentRecipe();
+      if (shown) renderRecipe(shown); else renderList();
+      var pressed = app.querySelector('[data-lang="' + state.lang + '"]');
+      if (pressed) pressed.focus();
+    }
+    else if (b.classList.contains('brand')) {
+      // The brand resets the filters and shows the full list.
+      state.category = 'All'; state.proteins = []; state.lastSlug = null;
+      if (currentRecipe()) { state.focusBrand = true; } // the hash change renders the list
+      else { e.preventDefault(); renderList('.brand'); window.scrollTo(0, 0); }
+    }
     else if (b.dataset.srv) {
       var r = currentRecipe();
       var cur = state.servings || r.servings || 1;
@@ -307,23 +353,6 @@
       var again = app.querySelector('[data-srv="' + b.dataset.srv + '"]');
       if (again && !again.disabled) again.focus();
     }
-  });
-
-  // Language toggle: re-render the current view in place and keep focus on the toggle.
-  document.querySelector('.lang-toggle').addEventListener('click', function (e) {
-    var b = e.target.closest('button[data-lang]');
-    if (!b || b.dataset.lang === state.lang) return;
-    state.lang = b.dataset.lang;
-    saveLang(state.lang);
-    applyChrome();
-    var r = currentRecipe();
-    if (r) renderRecipe(r); else renderList();
-  });
-
-  // Brand link resets everything.
-  document.querySelector('.brand').addEventListener('click', function () {
-    state.category = 'All'; state.proteins = []; state.lastSlug = null;
-    if (location.hash === '' || location.hash === '#') renderList();
   });
 
   window.addEventListener('hashchange', route);

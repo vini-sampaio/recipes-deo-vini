@@ -1,9 +1,11 @@
 // Interface text in English and Brazilian Portuguese, plus Portuguese versions of the recipes.
+// Each language also sets its toggle label (short), its HTML lang code and the two lines of the brand.
 // RECIPES_PT is keyed by the English recipe name. Write amounts first and keep the
 // "Prefix: " sections, so servings scaling works the same way in both languages.
 window.I18N = {
   en: {
-    brand: 'Vini & Deo Recipes', language: 'Language', myRecipes: 'My recipes', filters: 'Filters',
+    short: 'EN', htmlLang: 'en', brandLines: ['Deo & Vini', 'Recipes'],
+    language: 'Language', myRecipes: 'My recipes', filters: 'Filters',
     meal: 'Meal', protein: 'Protein', clear: 'Clear',
     emptyTitle: 'Nothing matches yet', emptyText: 'Try another meal or fewer proteins.', showAll: 'Show all recipes',
     back: 'Back to recipes', servingsGroup: 'Servings', fewer: 'Fewer servings', more: 'More servings',
@@ -13,7 +15,8 @@ window.I18N = {
     labels: {}
   },
   pt: {
-    brand: 'Receitas Vini & Deo', language: 'Idioma', myRecipes: 'Minhas receitas', filters: 'Filtros',
+    short: 'PT', htmlLang: 'pt-BR', brandLines: ['Receitas', 'Deo & Vini'],
+    language: 'Idioma', myRecipes: 'Minhas receitas', filters: 'Filtros',
     meal: 'Refeição', protein: 'Proteína', clear: 'Limpar',
     emptyTitle: 'Nada por aqui ainda', emptyText: 'Tente outra refeição ou menos proteínas.', showAll: 'Mostrar todas as receitas',
     back: 'Voltar para as receitas', servingsGroup: 'Porções', fewer: 'Menos porções', more: 'Mais porções',

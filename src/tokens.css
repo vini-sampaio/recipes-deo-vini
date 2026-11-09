@@ -6,23 +6,53 @@
   --lime-400: #91c11e;    /* Accent and badges, always with ink text */
   --lime-200: #d4eba0;    /* Meal tags, always with ink text */
   --lime-100: #eef6dc;    /* Soft tinted backgrounds */
-  --surface: #ffffff;     /* Cards */
+  --surface: #ffffff;     /* Cards, and text on green */
   --surface-alt: #f6f5f1; /* Page and section background */
   --ink: #242424;         /* Body text */
   --ink-muted: #5c5c5c;   /* Meta text */
-  --border: #dcdcd5;      /* Card and chip outlines */
+  --border: #dcdcd5;      /* Card and chip outlines, dividers */
   --border-strong: #8f8f86; /* Control outlines that need 3:1 contrast */
   --tomato-600: #c4401f;  /* Spicy or warning tags only */
 
   /* Type */
   --font-sans: "Inter", system-ui, sans-serif;
   --font-display: "Instrument Serif", Georgia, serif;
+  --weight-sans: 300;      /* Inter Light, all body text */
+  --weight-display: 400;   /* Instrument Serif Regular, all headings */
+  --text-brand: 40px;      /* Brand lockup in the sidebar */
+  --leading-brand: 0.9;
+  --tracking-brand: -1px;
+  --text-h2: 28px;
+  --leading-h2: 36px;
+  --text-body: 16px;
+  --leading-body: 24px;
+  --text-link: 15px;       /* Back and source links */
+  --text-meta: 14px;       /* Meta text, chips, toggles */
+  --leading-meta: 20px;
+  --text-label: 13px;      /* Uppercase filter labels */
+  --leading-label: 16px;
+  --tracking-label: 0.04em;
 
-  /* Spacing */
+  /* Spacing (4px grid: the number is the multiple of 4) */
+  --space-0-5: 2px;
+  --space-1-5: 6px;
   --space-2: 8px;
+  --space-2-5: 10px;
+  --space-3: 12px;
   --space-4: 16px;
+  --space-5: 20px;
   --space-6: 24px;
+  --space-8: 32px;
   --space-10: 40px;
+  --space-16: 64px;
+
+  /* Size */
+  --target-size: 44px;     /* Minimum touch target */
+  --chip-height: 40px;
+  --toggle-height: 36px;
+  --sidebar-width: 300px;
+  --content-width: 1200px;
+  --card-min-width: 260px;
 
   /* Radius */
   --radius-sm: 6px;
