@@ -64,7 +64,7 @@
   }
   // Meal tag, then one tag per protein.
   function tagsHTML(r) {
-    return '<div class="tags"><span class="tag tag--meal">' + esc(cats(r).map(label).join(' · ')) + '</span>' +
+    return '<div class="tags">' + cats(r).map(function (c) { return '<span class="tag tag--meal">' + esc(label(c)) + '</span>'; }).join('') +
       prots(r).map(function (p) { return '<span class="tag tag--protein">' + esc(label(p)) + '</span>'; }).join('') + '</div>';
   }
   function icon(protein, size) {
