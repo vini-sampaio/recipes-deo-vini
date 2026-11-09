@@ -140,8 +140,45 @@
       '</div></a>';
   }
 
+  // ---------- time-of-day order ----------
+  // The home list puts the next meal (Toronto time) first, then the meals after it, each group shuffled.
+  // Before 7:00 breakfast, before 11:00 snack, before 13:00 lunch, before 16:00 snack, before 18:00 dinner, after that breakfast again.
+  var SCHEDULE = [[7, 'Breakfast'], [11, 'Snack'], [13, 'Lunch'], [16, 'Snack'], [18, 'Dinner'], [24, 'Breakfast']];
+  function torontoHour() {
+    try {
+      var parts = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Toronto', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' }).formatToParts(new Date());
+      var h = 0, m = 0;
+      parts.forEach(function (p) { if (p.type === 'hour') h = +p.value; if (p.type === 'minute') m = +p.value; });
+      return h + m / 60;
+    } catch (e) { var d = new Date(); return d.getHours() + d.getMinutes() / 60; }
+  }
+  function mealSequence() {
+    var h = torontoHour(), i = 0;
+    while (h >= SCHEDULE[i][0]) i++;
+    var seq = [];
+    for (var k = 0; k < SCHEDULE.length; k++) {
+      var meal = SCHEDULE[(i + k) % SCHEDULE.length][1];
+      if (seq.indexOf(meal) < 0) seq.push(meal);
+    }
+    return seq; // e.g. ['Lunch', 'Snack', 'Dinner', 'Breakfast']
+  }
+  function shuffle(a) {
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var x = a[i]; a[i] = a[j]; a[j] = x; }
+    return a;
+  }
+  // Built once per page load, so filtering or switching language does not reshuffle the cards.
+  var ORDERED = (function () {
+    var seq = mealSequence();
+    var groups = seq.map(function () { return []; });
+    window.RECIPES.forEach(function (r) {
+      var best = Math.min.apply(null, cats(r).map(function (c) { var i = seq.indexOf(c); return i < 0 ? seq.length : i; }));
+      (groups[best] || (groups[best] = [])).push(r);
+    });
+    return groups.reduce(function (all, g) { return all.concat(shuffle(g)); }, []);
+  })();
+
   function visibleRecipes() {
-    return window.RECIPES.filter(function (r) {
+    return ORDERED.filter(function (r) {
       var okCat = state.category === 'All' || cats(r).indexOf(state.category) > -1;
       var okProt = state.proteins.length === 0 || prots(r).some(function (p) { return state.proteins.indexOf(p) > -1; });
       return okCat && okProt;
