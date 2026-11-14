@@ -123,5 +123,8 @@ window.RECIPES_PT = {
     steps: ['Coloque tudo no liquidificador e bata até ficar liso.', 'Sirva em um copo e beba na hora.', 'Dicas: Use mirtilos congelados para um smoothie mais gelado e cremoso. Se ficar grosso demais, junte mais leite ou água; se ficar ralo, junte alguns cubos de gelo. Para uma versão sem oleaginosas, use pasta de semente de girassol e leite de coco; qualquer outro leite também funciona.'] },
   'Whipped peanut butter yogurt bowl': { name: 'Bowl de iogurte batido com pasta de amendoim',
     ingredients: ['1 xíc. de iogurte grego natural', '2 col. (sopa) de pasta de amendoim integral', '2 col. (sopa) de granola', '2 col. (sopa) de mirtilos frescos ou congelados', '1 col. (chá) de xarope de bordo (maple)', 'Opcional: geleia de frutas vermelhas ou de chia para misturar'],
-    steps: ['Bata vigorosamente o iogurte com a pasta de amendoim em uma tigela.', 'Cubra com a granola, os mirtilos e o xarope.', 'Dicas: Use iogurte de coco para uma versão sem lactose. Dura até 3 dias na geladeira em pote fechado.'] }
+    steps: ['Bata vigorosamente o iogurte com a pasta de amendoim em uma tigela.', 'Cubra com a granola, os mirtilos e o xarope.', 'Dicas: Use iogurte de coco para uma versão sem lactose. Dura até 3 dias na geladeira em pote fechado.'] },
+  'Pizza dough': { name: 'Massa de pizza',
+    ingredients: ['125 ml de água', '250 g de farinha de trigo', '1 col. (chá) de sal', '2 col. (chá) de açúcar', '2 col. (sopa) de óleo vegetal', '1 col. (chá) de fermento biológico seco'],
+    steps: ['Misture a água, a farinha, o sal, o açúcar, o óleo e o fermento em uma tigela até formar uma massa.', 'Sove a massa por 5 minutos.'] }
 };

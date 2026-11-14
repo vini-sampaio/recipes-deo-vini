@@ -137,5 +137,9 @@ window.RECIPES = [
   { name: 'Whipped peanut butter yogurt bowl', category: 'Snack', protein: 'Vegetarian', time: 5, servings: 1,
     image: 'images/whipped-peanut-butter-yogurt-bowl.jpg',
     ingredients: ['1 cup plain Greek yogurt', '2 tbsp natural peanut butter', '2 tbsp granola', '2 tbsp blueberries, fresh or frozen', '1 tsp maple syrup', 'Optional: berry jam or chia jam to swirl in'],
-    steps: ['Whisk the yogurt and peanut butter together vigorously in a bowl.', 'Top with the granola, blueberries and maple syrup.', 'Tips: Use coconut yogurt for a dairy-free version. Keeps in an airtight container in the fridge up to 3 days.'] }
+    steps: ['Whisk the yogurt and peanut butter together vigorously in a bowl.', 'Top with the granola, blueberries and maple syrup.', 'Tips: Use coconut yogurt for a dairy-free version. Keeps in an airtight container in the fridge up to 3 days.'] },
+  { name: 'Pizza dough', category: 'Dinner', time: 10, servings: 1,
+    image: 'images/pizza-dough.jpg',
+    ingredients: ['125 ml water', '250 g all-purpose flour', '1 tsp salt', '2 tsp sugar', '2 tbsp vegetable oil', '1 tsp dry yeast'],
+    steps: ['Mix the water, flour, salt, sugar, oil and yeast in a bowl until a dough forms.', 'Knead the dough for 5 minutes.'] }
 ];

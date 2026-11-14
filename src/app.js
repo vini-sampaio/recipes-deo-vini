@@ -47,7 +47,7 @@
   }
   function slug(name) { return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
   function cats(r) { return r.cats || [r.category]; }
-  function prots(r) { return r.prots || [r.protein]; }
+  function prots(r) { return r.prots || (r.protein ? [r.protein] : []); }
   function servingsText(n) { return n + ' ' + (n === 1 ? t('serving') : t('servings')); }
   function meta(r) {
     var v = view(r);
