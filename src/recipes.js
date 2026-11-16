@@ -141,5 +141,10 @@ window.RECIPES = [
   { name: 'Pizza dough', category: 'Dinner', time: 10, servings: 1,
     image: 'images/pizza-dough.jpg',
     ingredients: ['125 ml water', '250 g all-purpose flour', '1 tsp salt', '2 tsp sugar', '2 tbsp vegetable oil', '1 tsp dry yeast'],
-    steps: ['Mix the water, flour, salt, sugar, oil and yeast in a bowl until a dough forms.', 'Knead the dough for 5 minutes.'] }
+    steps: ['Mix the water, flour, salt, sugar, oil and yeast in a bowl until a dough forms.', 'Knead the dough for 5 minutes.'] },
+  { name: 'Paleo banana bread', category: 'Breakfast', protein: 'Eggs', time: 50, servings: 12, note: 'plus cooling',
+    source: 'https://healthyrecipesblogs.com/paleo-banana-bread/',
+    image: 'images/paleo-banana-bread.jpg',
+    ingredients: ['Cooking spray for the pan (avocado oil works well)', '3 large eggs', '2 large bananas, well mashed (1 cup); use 3 bananas (1 1/2 cups) for a paleo version', '1 tbsp vanilla extract', '2 tbsp sugar-free sweetener, or honey for a paleo version', '225 g almond flour (2 cups), measured by weight', '1 tbsp ground cinnamon, or 1 to 2 tsp for a milder flavor', 'Pinch of kosher salt', '1 tsp baking soda, or 1 tbsp baking powder (gluten-free if needed)'],
+    steps: ['Heat the oven to 180°C (350°F). Line a small loaf pan (21 x 11 cm) with parchment strips, leaving an overhang on each side, and lightly spray it with oil.', 'In a medium bowl, whisk together the eggs, bananas, vanilla and sweetener.', 'Gradually whisk in the almond flour, cinnamon, salt and baking soda until smooth.', 'Transfer the batter to the pan with a rubber spatula and tap the pan gently on the counter to level it.', 'Bake 30 to 40 minutes (40 to 50 with three bananas and honey), until browned, set and a toothpick in the center comes out dry.', 'Lift the bread out by the parchment onto a wire rack and remove the parchment so air can circulate.', 'Cool completely on the rack, about 2 hours. Cut into 12 slices and serve.'] }
 ];
